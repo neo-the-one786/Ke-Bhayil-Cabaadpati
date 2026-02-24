@@ -565,8 +565,7 @@ export default function Quiz() {
             const revivable = Object.entries(lifelines)
                 .filter(([k, available]) => !available && k !== 'wildCard' && !lifelinesUsedInCurrentQuestion.includes(k as any));
             if (revivable.length === 0) {
-                audioManager.playSfx('SFX_WRONG');
-                return;
+                return; // Silently block — button is already disabled in UI
             }
         }
 

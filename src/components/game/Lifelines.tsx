@@ -74,6 +74,16 @@ export default function Lifelines({ onUse, disabled = false }: LifelinesProps) {
                     isDisabled = true;
                 }
 
+                // 5. Wild Card disabled if no revivable lifelines exist
+                // (all used lifelines were used on the current question, so nothing to revive)
+                if (isWildCard) {
+                    const revivable = Object.entries(lifelines)
+                        .filter(([k, available]) => !available && k !== 'wildCard' && !lifelinesUsedInCurrentQuestion.includes(k as any));
+                    if (revivable.length === 0) {
+                        isDisabled = true;
+                    }
+                }
+
                 const isClickable = isAvailable && !isDisabled;
 
                 return (
