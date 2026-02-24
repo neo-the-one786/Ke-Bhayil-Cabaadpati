@@ -620,6 +620,7 @@ export default function Quiz() {
         } else if (key === 'wildCard') {
             setShowWildCard(true);
             markLifelineUsed('wildCard');
+            audioManager.playSfx('VO_WILD_CARD');
         }
     };
 
