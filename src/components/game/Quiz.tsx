@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGameStore } from "@/store/gameStore";
 import { audioManager } from "@/lib/audio";
-import { SAFETY_NETS } from "@/lib/constants";
+import { SAFETY_NETS, PRIZE_LADDER } from "@/lib/constants";
 import PrizeLadder from "./PrizeLadder";
 import Lifelines from "./Lifelines";
 import HexagonBox from "./HexagonBox";
@@ -559,12 +559,12 @@ export default function Quiz() {
             return;
         }
 
-        // RULE: Wild Card cannot be used until another lifeline has been used
+        // RULE: Wild Card cannot be used unless there's a revivable lifeline
+        // (a lifeline that was used, but NOT on the current question)
         if (key === 'wildCard') {
-            const totalUsed = Object.values(lifelines).filter(v => v === false).length;
-            // Note: lifelines tracks AVAILABILITY (true = available). So false = used.
-            // If all are true (available), then totalUsed is 0.
-            if (totalUsed === 0) {
+            const revivable = Object.entries(lifelines)
+                .filter(([k, available]) => !available && k !== 'wildCard' && !lifelinesUsedInCurrentQuestion.includes(k as any));
+            if (revivable.length === 0) {
                 audioManager.playSfx('SFX_WRONG');
                 return;
             }
@@ -653,6 +653,9 @@ export default function Quiz() {
 
     const confirmQuit = () => {
         if (isLocked || isDoubleDipActive) return; // Parse safety
+        // Set money to the prize for the current question level
+        const currentPrize = PRIZE_LADDER[currentQuestionIndex]?.amount ?? 0;
+        setMoneyWon(currentPrize);
         setPhase('QUIT');
         audioManager.playSfx('SFX_WIN');
     };

@@ -81,7 +81,7 @@ export default function Result() {
                         <div className="mb-4">
                             <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-2 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]" />
                             <h2 className="text-2xl md:text-3xl text-kbc-gold font-bold uppercase tracking-widest mb-1">
-                                {phase === 'QUIT' ? 'You Quit With' : 'Congratulations!'}
+                                {phase === 'QUIT' ? `You Quit With ${formatMoney(moneyWon)}` : 'Congratulations!'}
                             </h2>
                             <p className="text-white/80 text-lg font-light">Well Played, {player?.name}</p>
                         </div>
