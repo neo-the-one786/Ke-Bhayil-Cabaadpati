@@ -53,7 +53,7 @@ export const QUESTION_POOL: Record<number, Question[]> = {
             3, "Plants absorb this gas to perform photosynthesis."),
 
         // Current Affairs | Answer: B (1)
-        q('q1_8', 1, 1000, "Who is the current Prime Minister of India (as of 2024)?",
+        q('q1_8', 1, 1000, "Who is the current Prime Minister of India (as of 2026)?",
             ["Amit Shah", "Narendra Modi", "Rahul Gandhi", "Yogi Adityanath"],
             1, "He previously served as the Chief Minister of Gujarat."),
 
