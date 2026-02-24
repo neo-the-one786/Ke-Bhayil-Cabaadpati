@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* KBC Palette */
+  --background: #0a0e17;
+  /* Deep Navy/Black */
+  --foreground: #e0e0e0;
+
+  --kbc-gold: #fbbf24;
+  /* Amber-400 equivalent */
+  --kbc-gold-glow: #d97706;
+  --kbc-blue: #1e3a8a;
+  /* Blue-900 */
+  --kbc-purple: #4c1d95;
+  /* Violet-900 */
+
+  --correct: #15803d;
+  /* Green-700 */
+  --wrong: #b91c1c;
+  /* Red-700 */
+  --wait: #a16207;
+  /* Yellow-700 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-kbc-gold: var(--kbc-gold);
+  --color-kbc-gold-glow: var(--kbc-gold-glow);
+  --color-kbc-blue: var(--kbc-blue);
+  --color-kbc-purple: var(--kbc-purple);
+  --color-correct: var(--correct);
+  --color-wrong: var(--wrong);
+  --color-wait: var(--wait);
+
+  --font-sans: var(--font-outfit);
+}
+
+* {
+  font-family: Georgia, serif !important;
+}
+
+body {
+  background: radial-gradient(circle at center, #1b0a2e 0%, #0a0414 100%);
+  color: var(--foreground);
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px var(--kbc-gold);
+  }
+
+  50% {
+    box-shadow: 0 0 20px var(--kbc-gold-glow);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
